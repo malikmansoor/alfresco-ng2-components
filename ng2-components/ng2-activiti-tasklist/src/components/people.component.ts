@@ -79,10 +79,16 @@ export class PeopleComponent implements AfterViewInit {
     }
 
     searchUser(searchedWord: string) {
+        let userList = [];
         this.peopleService.getWorkflowUsers(this.taskId, searchedWord)
-            .subscribe((users) => {
-                this.peopleSearchObserver.next(users);
-            },         error => this.logService.error('Could not load users'));
+            .subscribe(
+            (user) => {
+                userList.push(user);
+            },
+            (error) => this.logService.error('Could not load users'),
+            () => {
+                this.peopleSearchObserver.next(userList);
+            });
     }
 
     involveUser(user: User) {
@@ -135,5 +141,4 @@ export class PeopleComponent implements AfterViewInit {
     onCloseSearch() {
         this.showAssignment = false;
     }
-
 }

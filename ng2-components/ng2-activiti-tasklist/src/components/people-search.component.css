@@ -83,6 +83,18 @@ adf-people-list >>> alfresco-datatable >>> .people-pic {
     min-width: 30px;
 }
 
+.people-img {
+    text-align: center;
+    border-radius: 90%;
+    width: 40px;
+    height: 40px;
+    margin-right: 0%;
+    cursor: pointer;
+    vertical-align: middle;
+    background: #ffc800;
+    padding: 10px 6px;
+}
+
 adf-people-list >>> alfresco-datatable >>> td.mdl-data-table__cell--non-numeric.non-selectable.data-cell{
     padding: 4px 12px;
 }
