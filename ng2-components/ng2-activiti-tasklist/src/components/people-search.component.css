@@ -46,7 +46,7 @@
     overflow-y: auto;
 }
 
-adf-people-list >>> alfresco-datatable >>> thead {
+adf-people-list >>> adf-datatable >>> thead {
     display: none;
 }
 
@@ -66,33 +66,29 @@ adf-people-list >>> alfresco-datatable >>> thead {
     color: rgb(255, 152, 0);
 }
 
-adf-people-list >>> alfresco-datatable >>> .people-full-name {
+adf-people-list >>> adf-datatable >>> .people-full-name {
     font-family: 'Muli';
 }
 
-adf-people-list >>> alfresco-datatable >>> .people-pic {
+.people-pic {
     background: #ffc800;
     padding: 10px 6px;
-    border-radius: 100px;
+    border-radius: 90%;
     color: #fff;
+    width: 30px;
     text-align: center;
     font-weight: bolder;
     font-size: 16px;
     font-family: Muli;
     text-transform: uppercase;
-    min-width: 30px;
+    vertical-align: middle;
 }
 
 .people-img {
-    text-align: center;
     border-radius: 90%;
     width: 40px;
     height: 40px;
-    margin-right: 0%;
-    cursor: pointer;
     vertical-align: middle;
-    background: #ffc800;
-    padding: 10px 6px;
 }
 
 adf-people-list >>> alfresco-datatable >>> td.mdl-data-table__cell--non-numeric.non-selectable.data-cell{
