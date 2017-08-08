@@ -1,50 +1,51 @@
-@import 'theming';
-
 $breadcrumb-chevron-spacer: 2px;
 
-.adf-breadcrumb {
-    display: flex;
+@mixin mat-breadcrumb-theme($theme) {
 
-    &.mat-primary {
-        color: mat-color($primary);
-    }
-
-    &.mat-accent {
-        color: mat-color($accent);
-    }
-
-    &.mat-warn {
-        color: mat-color($warn);
-    }
-
-    &-container {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        cursor: default;
+    .adf-breadcrumb {
         display: flex;
-        overflow: hidden;
-        height: 25px;
-    }
 
-    &-item {
-        padding-right: $breadcrumb-chevron-spacer;
-        overflow: hidden;
-        display: flex;
-        line-height: 24px;
-
-        &-anchor {
-            color: inherit;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
+        &.mat-primary {
+            color: mat-color($primary);
         }
 
-        &.active {
-            display: block;
+        &.mat-accent {
+            color: mat-color($accent);
+        }
+
+        &.mat-warn {
+            color: mat-color($warn);
+        }
+
+        &-container {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            cursor: default;
+            display: flex;
+            overflow: hidden;
+            height: 25px;
+        }
+
+        &-item {
+            padding-right: $breadcrumb-chevron-spacer;
+            overflow: hidden;
+            display: flex;
+            line-height: 24px;
+
+            &-anchor {
+                color: inherit;
+                text-decoration: none;
+                display: block;
+                width: 100%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            &.active {
+                display: block;
+            }
         }
     }
 }
