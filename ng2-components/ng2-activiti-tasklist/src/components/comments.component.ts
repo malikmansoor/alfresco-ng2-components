@@ -21,6 +21,7 @@ import { Observable, Observer } from 'rxjs/Rx';
 
 import { Comment } from '../models/comment.model';
 import { TaskListService } from '../services/tasklist.service';
+import { PeopleService } from '../services/people.service';
 
 @Component({
     selector: 'adf-comments, activiti-comments',
@@ -53,7 +54,8 @@ export class CommentsComponent implements OnChanges {
      * @param activitiTaskList Task service
      */
     constructor(translateService: AlfrescoTranslationService,
-                private activitiTaskList: TaskListService) {
+                private activitiTaskList: TaskListService,
+                private peopleService: PeopleService) {
 
         if (translateService) {
             translateService.addTranslationFolder('ng2-activiti-tasklist', 'assets/ng2-activiti-tasklist');
@@ -79,18 +81,19 @@ export class CommentsComponent implements OnChanges {
     private getTaskComments(taskId: string): void {
         this.resetComments();
         if (taskId) {
-            this.activitiTaskList.getComments(taskId).subscribe(
+            this.activitiTaskList.getComments(taskId)
+                .subscribe(
                 (res: Comment[]) => {
                     res = res.sort((comment1: Comment, comment2: Comment) => {
                         let date1 = new Date(comment1.created);
                         let date2 = new Date(comment2.created);
                         return date1 > date2 ? -1 : date1 < date2 ? 1 : 0;
                     });
-
                     res.forEach((comment) => {
+                        this.peopleService.addImageToUser(comment.createdBy);
                         this.commentObserver.next(comment);
                     });
-                },
+                    },
                 (err) => {
                     this.error.emit(err);
                 }
@@ -105,11 +108,14 @@ export class CommentsComponent implements OnChanges {
     add(): void {
         if (this.message && this.message.trim() && !this.beingAdded) {
             this.beingAdded = true;
-            this.activitiTaskList.addComment(this.taskId, this.message).subscribe(
+            this.activitiTaskList.addComment(this.taskId, this.message)
+            .subscribe(
                 (res: Comment) => {
-                    this.comments.unshift(res);
-                    this.message = '';
-                    this.beingAdded = false;
+                        res.createdBy.userImage = this.peopleService.getUserImage(res.createdBy);
+                        this.comments.unshift(res);
+                        this.message = '';
+                        this.beingAdded = false;
+
                 },
                 (err) => {
                     this.error.emit(err);
@@ -126,4 +132,5 @@ export class CommentsComponent implements OnChanges {
     isReadOnly(): boolean {
         return this.readOnly;
     }
+
 }

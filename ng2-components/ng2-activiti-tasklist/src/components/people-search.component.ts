@@ -26,7 +26,7 @@ declare let componentHandler: any;
 @Component({
     selector: 'adf-people-search, activiti-people-search',
     templateUrl: './people-search.component.html',
-    styleUrls: ['./people-search.component.css']
+    styleUrls: ['./people-search.component.scss']
 })
 
 export class PeopleSearchComponent implements OnInit, AfterViewInit {
@@ -119,5 +119,9 @@ export class PeopleSearchComponent implements OnInit, AfterViewInit {
 
     hasUsers() {
         return (this.users && this.users.length > 0);
+    }
+
+    getImage(user: User){
+        return 'url('+user.userImage+')';
     }
 }
